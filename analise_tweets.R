@@ -31,7 +31,7 @@ inspect(texto[1:2])
 tweets_trans <- tm_map(texto, stripWhitespace)
 inspect(tweets_trans[[1]])
 
-#Convertendo para minúsculo
+#Convertendo para minúsculow
 tweets_trans <- tm_map(tweets_trans, content_transformer(tolower))
 inspect(tweets_trans[[1]])
 
@@ -40,12 +40,22 @@ tweets_trans <- tm_map(tweets_trans, removeWords, stopwords('pt'))
 inspect(tweets_trans[[1]])
 inspect(tweets_trans[[2]])
 
-tweets_trans <- tm_map(tweets_trans, function(x) gsub('@[[:alnum:]]*', '', x)) #removendo menções
+tweets_trans <- tm_map(tweets_trans, function(x) gsub('@http[[:alnum:]]*', '', x)) #removendo menções
 
-tweets_trans <- tm_map(tweets_trans, function(x) gsub('http[[:alnum:]]', , x))  #removendo URLs
 
+tweets_trans <- tm_map(tweets_trans, function(x)  gsub("http\\w+", "", x))
+
+
+
+
+tweets_trans
+
+tweets_trans
 unlist(tweets_trans)
-tweets_trans[[1]]
-df_tweets$tweets_tratados <- tweets_trans
+tweets_trans$content
+             
+typeof(tweets_trans)
+df_tweets$tweets_tratados <- tweets_trans$content
 
-tweets_trans[[2]]$content
+length(tweets_trans)
+df_tweets_tratados <- data.frame(tweets_trans)
